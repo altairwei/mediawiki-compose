@@ -26,9 +26,7 @@ services:
             - PROXY_RESTBASE_SUB=/{backend_hint}/v1
 
     web:
-        build: 
-            context: ./web
-            dockerfile: Dockerfile
+        image: altairwei/mediawiki:0.0.1
         restart: always
         depends_on:
             - db
