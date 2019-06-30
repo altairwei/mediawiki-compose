@@ -1,16 +1,13 @@
 version: '2'
 services:
-    volumes:
-        mysqldb_data: mysqldb-data
-        mediawiki_settings: mediawiki-settings
-        mediawiki_images: mediawiki-images
-
     db:
-        image: pastakhov/mysql:5.7
+        image: mysql:5.7
         restart: always
         environment:
             - MYSQL_ROOT_HOST=%
             - MYSQL_ROOT_PASSWORD=3dodPaTXF5
+        volumes:
+            - './mysqldb-data:/var/lib/mysql'
 
     proxy:
         image: pastakhov/varnish-mediawiki:1.0
@@ -65,6 +62,9 @@ services:
             - MW_FLOW_NAMESPACES=NS_TALK,NS_USER_TALK
             - PHP_LOG_ERRORS=On
             - PHP_ERROR_REPORTING=E_ALL #Production Value: E_ALL & ~E_DEPRECATED & ~E_STRICT
+        volumes:
+            - './mediawiki-settings:/mediawiki'
+            - './mediawiki-images:/var/www/html/w/images'
 
     memcached:
         image: memcached
