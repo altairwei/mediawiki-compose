@@ -7,6 +7,7 @@ services:
             - MYSQL_ROOT_HOST=%
             - MYSQL_ROOT_PASSWORD=3dodPaTXF5
         volumes:
+            #NOTE: make sure the directory permissions is right.
             - './mysqldb-data:/var/lib/mysql'
 
     proxy:
