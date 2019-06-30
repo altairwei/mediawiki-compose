@@ -30,7 +30,6 @@ services:
         restart: always
         depends_on:
             - db
-            - elasticsearch
             - memcached
             - parsoid
             - restbase
@@ -53,7 +52,6 @@ services:
             - MW_MAIN_CACHE_TYPE=CACHE_MEMCACHED
             - MW_MEMCACHED_SERVERS=memcached:11211
             - MW_SEARCH_TYPE=CirrusSearch
-            - MW_CIRRUS_SEARCH_SERVERS=elasticsearch
             - MW_REST_DOMAIN=web
             - MW_REST_PARSOID_URL=http://parsoid:8000
             - MW_REST_RESTBASE_URL=http://restbase:7231
@@ -87,10 +85,6 @@ services:
             - RB_CONF_API_URI_TEMPLATE=http://{domain}/w/api.php
             - RB_CONF_LOGGING_LEVEL=info #trace
             - RB_CONF_PDF_URI=http://pdf:3000
-
-    elasticsearch:
-        image: elasticsearch:5.6
-        restart: always
 
     pdf:
         image: msokk/electron-render-service
